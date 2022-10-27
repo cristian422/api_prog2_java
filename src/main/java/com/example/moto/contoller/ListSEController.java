@@ -22,12 +22,12 @@ public class ListSEController {
         return listSEService.getList().getHead();
     }
 
-    @GetMapping(path ="append/{identification}/{name}/{age}/{gender}")
-    public Node append(@PathVariable String identification,@PathVariable String name, @PathVariable byte age,@PathVariable char gender){
-        Kid newkid=new Kid(identification,name,age,gender);
-        listSEService.getList().add(newkid);
-        return listSEService.getList().getHead();
-    }
+   // @GetMapping(path ="append/{identification}/{name}/{age}/{gender}")
+    //public Node append(@PathVariable String identification,@PathVariable String name, @PathVariable byte age,@PathVariable char gender){
+      //  Kid newkid=new Kid(identification,name,age,gender);
+       // listSEService.getList().add(newkid);
+        //return listSEService.getList().getHead();
+    //}
     @PostMapping   //es el primer metodo para agregar un kid por el post
     public String addKid(@RequestBody Kid kid){
         return  listSEService.add(kid);//llamamos al metodo en el service y le damos el niño a ingresar
@@ -102,6 +102,22 @@ public class ListSEController {
     @PostMapping(path = "intercalateEvenAndOdd")//intercala pares e inpares
     public  String intercalateEvenAndOdd(){
         return listSEService.intercalateEvenAndOdd();
+    }
+
+    @PostMapping(path = "GetKidsByGenderAndAge")
+    public List<Kid> GetKidsByGenderAndAge(@RequestBody GetKidsByGenderAndAgeDTO getKidsByGenderAndAgeDTO){
+        return listSEService.GetKidsByGenderAndAge(getKidsByGenderAndAgeDTO.getGender(),getKidsByGenderAndAgeDTO.getAge());
+    }
+
+    @PostMapping(path = "informationbycities")
+    public List<CityDto> InformationByCities(){return listSEService.InformationByCities();}
+    @PostMapping(path = "kidsbycities")
+    public int kidbyCities(@RequestBody KidsByCitiesDTO kidsByCitiesDTO){return listSEService.KidsByCities(kidsByCitiesDTO.getCity(),kidsByCitiesDTO.getGender());}
+
+
+    @PostMapping(path = "promhermanos")
+    public float PromHermanos(@RequestBody String name){
+        return listSEService.PromHermanos(name);
     }
 
 

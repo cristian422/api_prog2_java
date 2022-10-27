@@ -134,7 +134,7 @@ public class ListaDE {
         NodeDE temp=this.head;//creamos un temporal de nodeDE
         int contador=1;//iniciamos un contador en uno
         //creamos un kid de los datos del kidDTO
-        Kid Newkid = new Kid(kidDTO.dataKid.getIdentification(), kidDTO.dataKid.getName(), kidDTO.dataKid.getAge(), kidDTO.dataKid.getGender());
+        Kid Newkid = new Kid(kidDTO.dataKid.getIdentification(), kidDTO.dataKid.getName(), kidDTO.dataKid.getAge(), kidDTO.dataKid.getGender(),kidDTO.dataKid.getNumBrothers(),kidDTO.dataKid.getCity());
         NodeDE newKid = new NodeDE(Newkid);//ingresamos el kid en un nodoDE
         if (kidDTO.position == 1) {//si la posicion del DTO es igual a 1 se ingresa de primero
             newKid.setNext(temp);//guardamos al temporal en el set del nuevo nodo
@@ -231,7 +231,7 @@ public class ListaDE {
         while (temp!=null){//se recorre toda la lista
             KidDTO newKidDTO=new KidDTO(pocitionH,temp.getData());//creamos un dto kis con la posicion y el dato del temporal
             //creanos un nuevo niño con los datos del dto
-            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender());
+            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender(),newKidDTO.dataKid.getNumBrothers(), newKidDTO.dataKid.getCity());
             if(temp.getData().getGender()=='H'){//en el caso que sea un hombre
 
                 if (newKidDTO.getPosition()>lista.size+1){//si la posicion es mayor al tamaño de la lista lo agrega al final

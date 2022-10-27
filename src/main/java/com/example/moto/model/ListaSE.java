@@ -1,11 +1,13 @@
 package com.example.moto.model;
 
 
+import com.example.moto.service.CityService;
 import com.example.moto.service.ListSEService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,6 +16,7 @@ import java.util.List;
 public class ListaSE {
     private Node head;
     private int size;
+
 
     //metodo agregar al final
     public String add(Kid kid) {
@@ -40,6 +43,8 @@ public class ListaSE {
 
         return "no paso nada";
     }
+
+
 
 
 
@@ -81,7 +86,7 @@ public class ListaSE {
         while (temp!=null){//recorre hasta el final de la lista
             KidDTO newKidDTO=new KidDTO(pocitionH,temp.getData());
             //creamos un kid con los datos de temp
-            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender());
+            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender(),newKidDTO.dataKid.getNumBrothers(), newKidDTO.dataKid.getCity());
             if(temp.getData().getGender()=='H'){//para genero hombre
 
                 if (newKidDTO.getPosition()>lista.size+1){//posicion mayor al tamaño
@@ -119,7 +124,7 @@ public class ListaSE {
         int pocitionM=2;
         while (temp!=null){//leer toda la lista
             KidDTO newKidDTO=new KidDTO(pocitionH,temp.getData());
-            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender());
+            Kid newkid=new Kid(newKidDTO.dataKid.getIdentification(),newKidDTO.dataKid.getName(),newKidDTO.dataKid.getAge(),newKidDTO.dataKid.getGender(),newKidDTO.dataKid.getNumBrothers(), newKidDTO.dataKid.getCity());
             int variable=Math.floorMod( temp.getData().getAge(),2);
             //si es igual a cero es que es par
             if(variable==0){
@@ -209,12 +214,13 @@ public class ListaSE {
         }
         while (contador<i){//mientras sea menor a la posicion
 
-            if (contador==i-1){//se queda uno antes de la posicion
-                temp.setNext(temp.getNext().getNext());//guarda en el siguiente al que le sigue del que se va a eliminar
-            }
+
             temp=temp.getNext();//pasa a ser el siguiente
             contador=contador+1;//aumenta en uno
 
+        }
+        if (contador==i-1){//se queda uno antes de la posicion
+            temp.setNext(temp.getNext().getNext());//guarda en el siguiente al que le sigue del que se va a eliminar
         }
         size--;//se reduce en uno la lista
 
@@ -225,7 +231,7 @@ public class ListaSE {
         Node temp=this.head;
         int contador=1;
         //creamos un niño con los datos del dto
-            Kid newkid = new Kid(kidDTO.dataKid.getIdentification(), kidDTO.dataKid.getName(), kidDTO.dataKid.getAge(), kidDTO.dataKid.getGender());
+            Kid newkid = new Kid(kidDTO.dataKid.getIdentification(), kidDTO.dataKid.getName(), kidDTO.dataKid.getAge(), kidDTO.dataKid.getGender(),kidDTO.dataKid.getNumBrothers(), kidDTO.dataKid.getCity());
             Node newKid = new Node(newkid);//ingresamos al niño en un nodo
             if (kidDTO.position == 1) {
                 newKid.setNext(temp);//niño queda en la primero posicion
@@ -233,14 +239,14 @@ public class ListaSE {
             }
             while (contador < kidDTO.position) {//queda en una posicion antes
 
-                if (contador == kidDTO.position - 1) {
-                    newKid.setNext(temp.getNext());//guardamos al niño en la posicion
-                    temp.setNext(newKid);
-                }
+
                 temp = temp.getNext();//pasa a ser el siguiente
                 contador = contador + 1;//aumenta uno el contador
-
             }
+        if (contador == kidDTO.position - 1) {
+            newKid.setNext(temp.getNext());//guardamos al niño en la posicion
+            temp.setNext(newKid);
+        }
             size++;//aumneta en uno el tamaño
 
     }
@@ -340,6 +346,30 @@ public class ListaSE {
         }
         return contador;//devuelve la cantidad
     }
+    public List<Kid> GetKidsByGenderAndAge(char gender,int age){
+        List newList=new ArrayList<Kid>();
+        if (this.head!=null){
+
+            Node temp=this.head;
+            while (temp!=null) {
+                if (temp.getData().getGender() == gender) {
+                    if (temp.getData().getAge() >= age) {
+                        if (temp.getData().getNumBrothers() > 0) {
+                            newList.add(temp.getData());
+                        }
+                    }
+
+                }
+                temp=temp.getNext();
+            }
+
+
+        }
+        return newList;
+    }
+
+
+
 
 }
 

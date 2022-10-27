@@ -17,11 +17,11 @@ public class ListaDEService {
     //lista
     public ListaDEService(){
         listaDE=new ListaDE();
-        listaDE.addDE(new Kid("12358794", "andres", (byte) 2, 'M'));
-        listaDE.addDE(new Kid("789523146", "luis", (byte) 12, 'M'));
-        listaDE.addDE(new Kid("85246","andrea",(byte) 2,'M'));
-        listaDE.addDE(new Kid("741963546813","daniela",(byte) 5,'H'));
-        listaDE.addDE(new Kid("468791","jero",(byte) 9,'H'));
+        listaDE.addDE(new Kid("12358794", "andres", (byte) 2, 'M', (byte) 3,new City("001","Manizales")));
+        listaDE.addDE(new Kid("789523146", "luis", (byte) 12, 'M', (byte) 2,new City("002","Bogota")));
+        listaDE.addDE(new Kid("85246","andrea",(byte) 2,'M', (byte) 4,new City("003","Medellin")));
+        listaDE.addDE(new Kid("741963546813","daniela",(byte) 5,'H', (byte) 5,new City("003","Medellin")));
+        listaDE.addDE(new Kid("468791","jero",(byte) 9,'H', (byte) 8,new City("002","Bogota")));
 
     }
     //devuelve una lista de kid

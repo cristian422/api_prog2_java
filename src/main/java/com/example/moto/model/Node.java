@@ -14,7 +14,7 @@ public class Node {
     //se necesita un kid para crear
     public Node(Kid data){;
             this.data=data;
-
     }
+
 
 }
